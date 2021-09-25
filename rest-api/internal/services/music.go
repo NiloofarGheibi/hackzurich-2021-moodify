@@ -13,12 +13,13 @@ type Music interface {
 }
 
 type music struct {
-	Repo       repository.Repository
-	SpotifyAPI repository.Spotify
+	Repo        repository.Repository
+	SpotifyAPI  repository.Spotify
+	TrainingAPI repository.Training
 }
 
-func NewMusicService(repo repository.Repository, spotify repository.Spotify) *music {
-	return &music{Repo: repo, SpotifyAPI: spotify}
+func NewMusicService(repo repository.Repository, spotify repository.Spotify, training repository.Training) *music {
+	return &music{Repo: repo, SpotifyAPI: spotify, TrainingAPI: training}
 }
 
 func (u music) Store(ctx context.Context, track *models.Track) (*models.Track, error) {
@@ -39,12 +40,11 @@ func (u music) Store(ctx context.Context, track *models.Track) (*models.Track, e
 		audioFeatures.Speechiness,
 		audioFeatures.Tempo)
 
-	/*
-		TODO
-		HERE THE MODEL ENDPOINT GOES
-	*/
-
-	track.Mood = 4
+	mood, err := u.TrainingAPI.GetMood(ctx, track.Features)
+	if err != nil {
+		return nil, err
+	}
+	track.Mood = mood
 
 	userTrack, err := u.Repo.StoreTrack(ctx, track)
 	if err != nil {

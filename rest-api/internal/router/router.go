@@ -10,6 +10,7 @@ type Router struct {
 	Router     *gin.Engine
 	UserGroup  *gin.RouterGroup
 	RadioGroup *gin.RouterGroup
+	ActionGroup *gin.RouterGroup
 }
 
 // Create functions returns gin Engine with specified handler functions
@@ -19,6 +20,7 @@ func Create() *Router {
 	// SetUserGroup set user group in the router
 	r.UserGroup = r.Router.Group("/users")
 	r.RadioGroup = r.Router.Group("/radios")
+	r.ActionGroup = r.Router.Group("/recommendations")
 	return &r
 }
 
@@ -62,6 +64,16 @@ func (r *Router) InitRadioRoutes(radioController *controllers.Radio) *Router {
 	r.RadioGroup.POST(
 		"",
 		radioController.RegisterTrack,
+	)
+
+	return r
+}
+
+// InitActionRoutes initializes the routes in the radio group in the Router
+func (r *Router) InitActionRoutes(actionController *controllers.Action) *Router {
+	r.ActionGroup.GET(
+		"",
+		actionController.GetActionRecommendations,
 	)
 
 	return r

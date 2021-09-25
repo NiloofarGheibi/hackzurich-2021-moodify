@@ -49,16 +49,27 @@ func main() {
 	}
 	spotify := repository.NewSpotifyAPIRepository(authSpotifyClient)
 
+	trainingAPIClient, err := repository.NewRestyClient(conf.API.Host)
+	if err != nil {
+		log.Fatal().
+			Err(err).
+			Msg("unable to create training client")
+	}
+
+	training := repository.NewTrainingAPIRepository(trainingAPIClient)
+
 	userService := services.NewUserService(repo)
-	musicService := services.NewMusicService(repo, spotify)
+	musicService := services.NewMusicService(repo, spotify, training)
 
 	userController := controllers.NewUserController(userService)
 	radioController := controllers.NewRadioController(musicService)
+	actionController := controllers.NewActionController()
 
 	r := router.Create()
 	r.SetHealthEndPoint(health)
 	r.InitUserRoutes(userController)
 	r.InitRadioRoutes(radioController)
+	r.InitActionRoutes(actionController)
 
 	log.Fatal().
 		Err(r.Router.Run()).
