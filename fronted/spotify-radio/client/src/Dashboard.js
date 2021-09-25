@@ -66,7 +66,8 @@ export default function Dashboard({code}){
 
     return (
         trackSelected ? (
-                <Container className="d-flex align-items-center" style={{ height: "100vh" }}>
+                <Container className="d-flex align-items-center flex-column" style={{ height: "100vh", marginTop: "40%" }}>
+                    <h1 style={{ marginBottom: "40px" }}>Your Team Radio 📡</h1>
                     <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
                 </Container>
             )
