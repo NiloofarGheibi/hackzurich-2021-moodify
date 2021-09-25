@@ -40,11 +40,11 @@ func (u music) Store(ctx context.Context, track *models.Track) (*models.Track, e
 		audioFeatures.Speechiness,
 		audioFeatures.Tempo)
 
-	mood, err := u.TrainingAPI.GetMood(ctx, track.Features)
-	if err != nil {
-		return nil, err
-	}
-	track.Mood = mood
+	//mood, err := u.TrainingAPI.GetMood(ctx, track.Features)
+	//if err != nil {
+	//	return nil, err
+	//}
+	track.Mood = 4
 
 	userTrack, err := u.Repo.StoreTrack(ctx, track)
 	if err != nil {
