@@ -1,6 +1,10 @@
+from flask import Flask, jsonify, request
 from keras.models import model_from_json
 import numpy as np
 import sys
+
+app = Flask(__name__)
+
 
 target = ['Calm', 'Energetic', 'Happy', 'Sad']
 
@@ -17,12 +21,20 @@ print("Loaded model from disk")
 # evaluate loaded model on test data
 loaded_model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-col_features = [float(i) for i in sys.argv[1].split(',')]
+#col_features = [float(i) for i in sys.argv[1].split(',')]
 
-x = np.array(col_features).reshape(-1,1).T
-test = np.array(loaded_model.predict(x))
+@app.route('/features', methods=['POST'])
+def add_income():
+  response = request.get_json()
+  col_features = [float(i) for i in response['features'].split(',')]
 
-index = np.argmin(test)
-mood = target[index]
+  x = np.array(col_features).reshape(-1,1).T
+  test = np.array(loaded_model.predict(x))
 
-print(mood)
+  index = np.argmin(test)
+  mood = target[index]
+
+  return {"mood": mood}
+
+if __name__ == "__main__":
+    app.run()

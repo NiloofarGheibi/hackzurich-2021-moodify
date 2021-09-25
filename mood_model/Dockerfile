@@ -1,9 +1,27 @@
-FROM python:3
+# Using lightweight alpine image
+#FROM python:3.6-alpine
+FROM python:3.6-slim-buster
 
-ADD model.json /
-ADD model.h5 /
-ADD inference.py /
+#RUN apk add g++ 
 
-RUN pip install keras numpy
+# Installing packages
+#RUN apk update
+RUN pip install --no-cache-dir pipenv 
+#RUN pip install keras numpy
 
-CMD [ "python3", "./inference.py" ]
+# Defining working directory and adding source code
+WORKDIR /usr/src/app
+COPY bootstrap.sh ./
+COPY model.json ./
+COPY model.h5 ./
+COPY inference.py ./
+COPY requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+# Install API dependencies
+#RUN pipenv install
+
+# Start app
+EXPOSE 5000
+ENTRYPOINT ["/usr/src/app/bootstrap.sh"]
