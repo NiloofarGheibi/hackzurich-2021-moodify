@@ -12,4 +12,10 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+
+# IDE files
+.idea/
+rest-api/development/*
+rest-api/build/*
+
