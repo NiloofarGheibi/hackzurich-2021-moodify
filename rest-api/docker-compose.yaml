@@ -1,0 +1,42 @@
+version: '2.1'
+
+services:
+  migration:
+    image: boxfuse/flyway:5.2.3-alpine
+    volumes:
+      - ./migrations/sql:/flyway/sql
+      - ./migrations/flyway.conf:/flyway/conf/flyway.conf
+    command: ["-url=jdbc:postgresql://postgres:5432/hackathon_db?useUnicode=true&characterEncoding=utf8&useSSL=false", "-user=postgres", "-password=pgpassword", "migrate"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:latest
+    volumes:
+      - ./development/database/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    container_name: rest-api-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgpassword
+      - POSTGRES_DB=hackathon_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  backend:
+    build:
+      context: .
+      dockerfile: cmd/Dockerfile
+    ports:
+      - "9091:8080"
+    links:
+      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migration:
+        condition: service_started
+    container_name: backend

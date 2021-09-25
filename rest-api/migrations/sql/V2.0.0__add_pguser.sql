@@ -1,0 +1,6 @@
+DO
+$do$
+BEGIN
+    CREATE ROLE pguser WITH SUPERUSER LOGIN ENCRYPTED PASSWORD 'pgpassword';
+END
+$do$;
