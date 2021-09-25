@@ -6,6 +6,7 @@ import (
 	"rest-api/internal/exception"
 	"rest-api/internal/models"
 	"rest-api/internal/services"
+	"strings"
 )
 
 type Radio struct {
@@ -22,7 +23,7 @@ func (r *Radio) RegisterTrack(ctx *gin.Context) {
 		exception.AsHTTPError(ctx, exception.ErrInvalidInput.WithDetail(err.Error()))
 		return
 	}
-
+	track.TrackID = strings.Split(track.TrackID, ":")[2]
 	registeredTrack, err := r.MusicService.Store(ctx, track)
 	if err != nil {
 		exception.AsHTTPError(ctx, err)

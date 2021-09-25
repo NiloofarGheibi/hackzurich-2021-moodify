@@ -4,6 +4,33 @@ export default function TrackSearchResult({ track, chooseTrack, playingTrack, op
     function handlePlay() {
         chooseTrack(track)
     }
+    function SubmitSongAndOpenRadio() {
+        const url = 'http://localhost:9091';
+        const post = {
+            user_id: "c017fb99-067b-481f-979c-6c06e0a45786",
+            track_id: track.uri
+        };
+        const requestPromise = makeRequest(url, post);
+        console.log(requestPromise)
+        openRadio()
+    }
+    function makeRequest(url, data) {
+        return new Promise((resolve, reject) => {
+            let request = new XMLHttpRequest();
+            request.open('POST', url + '/radios');
+            request.onreadystatechange = () => {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        resolve(JSON.parse(request.response));
+                    } else {
+                        reject(JSON.parse(request.response));
+                    }
+                }
+            };
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(JSON.stringify(data));
+        });
+    }
 
     return (
         <div
@@ -18,7 +45,7 @@ export default function TrackSearchResult({ track, chooseTrack, playingTrack, op
                 <div className="text-muted">{track.artist}</div>
             </div>
             </div>
-            <h1 className="btn rounded-circle mr-2" style={{backgroundColor: "#A9A9A9", color: "white",  marginRight: "10px"}} onClick={openRadio}>+</h1>
+            <h1 className="btn rounded-circle mr-2" style={{backgroundColor: "#A9A9A9", color: "white",  marginRight: "10px"}} onClick={SubmitSongAndOpenRadio}>+</h1>
         </div>
     )
 }

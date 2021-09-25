@@ -1,6 +1,6 @@
 environment: development
 api:
-  host: https://apis.example.com
+  host: https://host.docker.internal:5000
 database:
   url: postgresql://postgres:5432/hackathon_db?sslmode=disable
   username: pguser

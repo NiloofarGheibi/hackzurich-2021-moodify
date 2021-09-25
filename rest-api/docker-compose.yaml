@@ -34,9 +34,17 @@ services:
       - "9091:8080"
     links:
       - postgres
+      - model
     depends_on:
       postgres:
         condition: service_healthy
       migration:
         condition: service_started
     container_name: backend
+  model:
+    build:
+      context: ../mood_model
+      dockerfile: Dockerfile
+    ports:
+      - "9092:5000"
+    container_name: model
