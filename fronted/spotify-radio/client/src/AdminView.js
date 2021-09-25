@@ -1,59 +1,98 @@
-import React from "react";
-import {VictoryChart, VictoryLine, VictoryScatter} from "victory";
+import React, {useState} from "react";
 import styled from '@emotion/styled';
+import GraphMonths from "./GraphMonths";
+import LocationDropDown from "./LocationDropDown";
+import Filters from "./Filters";
+import TimeDropDown from "./TimeDropDown";
+import TeamDropDown from "./TeamDropDown";
+import OverallMoodChart from "./OverallMoodChart";
 
-const StyledPoint = styled.circle`
-  fill: ${(props) => props.color};
-`;
 
-const colors = ["#A8E6CE", "#DCEDC2", "#FFD3B5", "#FFAAA6", "#FF8C94"];
-
-const currentMonth = "Sep";
-
-const ScatterPoint = ({ x, y, datum, min, max }) => {
-    const i = React.useMemo(() => {
-        return Math.floor(((datum.y - min) / (max - min)) * (colors.length - 1));
-    }, [datum, min, max]);
-
-    return <StyledPoint color={colors[i]} cx={x} cy={y} r={6} />;
-};
 
 export default function AdminView(){
-    const data = [
-        { x: "Jan", y: 43 },
-        { x: "Feb", y: 44 },
-        { x: "Mar", y: 47 },
-        { x: "Apr", y: 51 },
-        { x: "May", y: 57 },
-        { x: "Jun", y: 62 },
-        { x: "Jul", y: 67 },
-        { x: "Aug", y: 68 },
-        { x: "Sep", y: 63 },
-        { x: "Oct", y: 54 },
-        { x: "Nov", y: 47 },
-        { x: "Dec", y: 42 }
+    const actions = [
+        { todo: "Setup a 1-1 with your team members", when: "sad" },
+        { todo: "What about a team event? To spice things up", when: "calm" },
+        { todo: "Keep up the good work and the vibe!", when: "energetic" },
+        { todo: "Celebrate small things, it's important to show your team member's value", when: "happy" }
     ];
 
-    const temperatures = data.map(({ y }) => y);
-    const min = Math.min(...temperatures);
-    const max = Math.max(...temperatures);
-
     return (
-        <VictoryChart>
-            <VictoryLine data={data} />
-            <VictoryScatter
-                data={data}
-                dataComponent={<ScatterPoint min={min} max={max} />}
-            />
-            <VictoryLine
-                style={{
-                    data: { stroke: "red", strokeWidth: 2 },
-                    labels: { angle: -90, fill: "red", fontSize: 20 }
-                }}
-                // labels={["Important"]}
-                // labelComponent={<VictoryLabel y={100}/>}
-                x={() => "Sep"}
-            />
-        </VictoryChart>
+        <GlobalContainer>
+        <Container>
+            <ActionsBar>
+                <h1 style={{color:'#808080'}}>What can we do?</h1>
+                    {actions.map((action) => (
+                        <ActionItem key={action.id}>{action.todo}</ActionItem>
+                    ))}
+            </ActionsBar>
+            <Graphs>
+                <Filters />
+                <OverallMoodChart />
+            </Graphs>
+        </Container>
+            <styledDiv>
+                <GraphMonths />
+            </styledDiv>
+
+        </GlobalContainer>
     );
 }
+
+const styledDiv = styled.div`
+
+  width: 70%;
+`;
+const GlobalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: raw;
+  width: 100%;
+  height: 100%;
+`;
+
+
+
+const ActionsBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  // border-right: 4px solid #ddd;
+  padding: 10px 20px;
+  // background-color: #ddd;
+`;
+
+const ActionItem = styled.button`
+  background-color: #DCDCDC;
+  border-color: #DCDCDC;
+  padding: 15px 15px 15px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 22px;
+   &&:hover {
+  text-decoration: underline;
+}
+`;
+
+const Graphs = styled.div`
+width: 100%;
+height: 100%;
+position: relative 
+`;
+//
+// display:flex;
+// flex-direction: column;
+// justify-content: center;
+// align-items: center;
+// margin-top: 20px;
+// margin-bottom: 20px;
+// width: 100%;
+// height: 100%;
