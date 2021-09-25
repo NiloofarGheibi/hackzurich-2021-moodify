@@ -19,3 +19,23 @@ vendor/
 rest-api/development/*
 rest-api/build/*
 
+# See https://help.github.com/articles/ignoring-files/ for t more about ignoring files.
+
+# dependencies
+fronted/spotify-radio/client/node_modules/*
+fronted/spotify-radio/server/node_modules/*
+fronted/spotify-radio/.pnp
+.pnp.js
+
+# testing
+fronted/spotify-radio/coverage
+
+# production
+fronted/spotify-radio/build
+
+# misc
+.DS_Store
+
+fronted/spotify-radio/npm-debug.log*
+fronted/spotify-radio/yarn-debug.log*
+fronted/spotify-radio/yarn-error.log*
