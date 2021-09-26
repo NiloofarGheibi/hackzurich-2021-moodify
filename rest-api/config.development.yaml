@@ -6,7 +6,7 @@ database:
   username: pguser
   password: pgpassword
 spotify:
-  clientid: cedec6852cff43f38901967beae457eb
-  clientsecret: a88a1562e80f4e9084209aed3ea13fab
+  clientid: <CLIENT-ID>
+  clientsecret: <CLIENT-SECRET>
   tokenurl: https://accounts.spotify.com/api/token
   host: https://api.spotify.com

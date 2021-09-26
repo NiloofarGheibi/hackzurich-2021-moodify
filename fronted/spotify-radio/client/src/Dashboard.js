@@ -7,7 +7,7 @@ import TrackSearchResult from "./TrackSearchResult"
 import Player from "./Player"
 
 const spotifyApi = new SpotifyWebApi({
-    clientId: "4dce3921b23d43bda057e0cf0f5d7808",
+    clientId: <CLIENT_ID>,
 })
 
 export default function Dashboard({code}){
