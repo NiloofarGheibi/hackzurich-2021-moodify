@@ -20,6 +20,6 @@ const Container = styled.div`
   flex-direction: raw;
   justify-content: space-around;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
