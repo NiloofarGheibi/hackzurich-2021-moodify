@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/NiloofarGheibi/hackzurich-2021-moodify">
-    <img src="moodify.png" alt="Logo" width="200" height="150">
+    <img src="moodify.png" alt="Logo" width="250" height="200">
   </a>
 
 <h2 align="center">Hackzurich 2021</h2>
