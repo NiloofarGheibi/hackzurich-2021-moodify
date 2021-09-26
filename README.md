@@ -5,7 +5,6 @@
     <img src="moodify.png" alt="Logo" width="200" height="150">
   </a>
 
-<h1 align="center">Moodify</h1>
 <h2 align="center">Hackzurich 2021</h2>
 
 
