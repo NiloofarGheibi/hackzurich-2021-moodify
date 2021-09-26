@@ -2,7 +2,7 @@ import React from "react";
 import {VictoryChart,  VictoryLine, VictoryScatter} from "victory";
 import styled from '@emotion/styled';
 
-const colors = ["#A8E6CE", "#DCEDC2", "#FFD3B5", "#FFAAA6", "#FF8C94"];
+const colors = ["#7EC8E3", "#0E86D4", "#0000FF",  "#000C66", "#050A30"];
 
 const today = 26;
 
@@ -11,7 +11,7 @@ const ScatterPoint = ({ x, y, datum, min, max }) => {
         return Math.floor(((datum.y - min) / (max - min)) * (colors.length - 1));
     }, [datum, min, max]);
 
-    return <StyledPoint color={colors[i]} cx={x} cy={y} r={6} />;
+    return <StyledPoint color={colors[i]}  cx={x} cy={y} r={4} />;
 };
 
 export default function GraphMonths(){
@@ -54,8 +54,8 @@ export default function GraphMonths(){
     const max = Math.max(...moods);
 
     return (
-            <VictoryChart >
-                <VictoryLine data={data}  />
+            <VictoryChart  width={1000}>
+                <VictoryLine data={data}  style={{data: {stroke: "#7EC8E3"}}} />
                 <VictoryScatter
                     data={data}
                     dataComponent={<ScatterPoint min={min} max={max}/>}
@@ -79,24 +79,3 @@ const StyledPoint = styled.circle`
 const Container = styled.div`            
 width: 80%;
 `;
-
-
-// { x: "13", y: 43 },
-// { x: "14", y: 44 },
-// { x: "15", y: 47 },
-// { x: "16", y: 51 },
-// { x: "17", y: 57 },
-// { x: "18", y: 62 },
-// { x: "19", y: 67 },
-// { x: "20", y: 68 },
-// { x: "21", y: 63 },
-// { x: "22", y: 54 },
-// { x: "23", y: 47 },
-// { x: "24", y: 42 },
-// { x: "25", y: 62 },
-// { x: "26", y: 67 },
-// { x: "27", y: 68 },
-// { x: "28", y: 63 },
-// { x: "29", y: 54 },
-// { x: "30", y: 47 },
-// { x: "31", y: 42 }
