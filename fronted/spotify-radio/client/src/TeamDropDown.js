@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 
 export default function TeamDropDown(){
-    const options = ["Team1", "Team2", "Team3"]
+    const options = ["Infrastructure", "Design", "Product", "Customer Care"]
     const optionName = "TEAM"
 
     let [selectedOption, setSelectedOption] = useState("")

@@ -57,7 +57,7 @@ export default function OverallMoodChart(){
                     text="Energetic"
                 />
                 <VictoryArea
-                    style={{data: { fill: 'MediumVioletRed'}}}
+                    style={{data: { fill: 'DarkOrange'}}}
                     data={data_energetic}
                 />
                 <VictoryLabel
@@ -75,7 +75,7 @@ export default function OverallMoodChart(){
                     text="Calm"
                 />
                 <VictoryArea
-                    style={{ data: { fill: "DarkOrange" } }}
+                    style={{ data: { fill: "MediumVioletRed" } }}
                     data={data_calm}
                 />
                 <VictoryLabel
@@ -87,14 +87,14 @@ export default function OverallMoodChart(){
                     style={{ data: { fill: "SkyBlue" } }}
                     data={data_happy}
                 />
-                <VictoryLegend x={15} y={2}
+                <VictoryLegend x={0} y={0}
                                title="Mood indications"
-                               gutter={8}
+                               gutter={18}
                                orientation="vertical"
                                style={{ border: { stroke: "black" }, title: { fontSize: 6 }}}
                                data={[
-                                   { name: "Anxious/Frantic", symbol: { fill: "MediumVioletRed" } },
-                                   { name: "Exuberance", symbol: { fill: "DarkOrange" } },
+                                   { name: "Anxious/Frantic", symbol: { fill: "DarkOrange" } },
+                                   { name: "Exuberance", symbol: { fill: "MediumVioletRed" } },
                                    { name: "Depression", symbol: { fill: "SteelBlue" } },
                                    { name: "Contentment", symbol: { fill: "SkyBlue" } }
                                ]}
