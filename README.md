@@ -53,4 +53,3 @@ We use a machine learning model to predict the mood of a given track based on fe
 - Cloud services: Microsoft Azure
 - Database: PostgreSQL
 - APIs: Spotify
-- Trained Models: Keras, Tensorflow 
