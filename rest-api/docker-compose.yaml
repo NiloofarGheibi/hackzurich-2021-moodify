@@ -41,10 +41,13 @@ services:
       migration:
         condition: service_started
     container_name: backend
-  model:
-    build:
-      context: ../mood_model
-      dockerfile: Dockerfile
+  mood-model:
+    image: isabelly/mood_model:v1
     ports:
       - "9092:5000"
-    container_name: model
+    container_name: mood-model
+  predict-model:
+    image: isabelly/predict_model:v1
+    ports:
+      - "9093:5000"
+    container_name: predict-model

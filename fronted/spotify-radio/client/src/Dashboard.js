@@ -66,14 +66,16 @@ export default function Dashboard({code}){
 
     return (
         trackSelected ? (
-                <Container className="d-flex align-items-center flex-column" style={{ height: "100vh", marginTop: "40%" }}>
+                <Container className="d-flex align-items-center flex-column" style={{ height: "100vh", marginTop: "20%" }}>
                     <h1 style={{ marginBottom: "40px" }}>Your Team Radio 📡</h1>
                     <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
                 </Container>
             )
             : <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
                 <h1 className="d-flex justify-content-center">Hey you :)</h1>
-                <h1 className="d-flex justify-content-center mb-2">What is the song of your mood today?</h1>
+                <h1 className="d-flex justify-content-center"> </h1>
+                <h1 className="d-flex justify-content-center mb-2">Which music is in your mind?</h1>
+                <h1 className="d-flex justify-content-center"> </h1>
                 <Form.Control
                             type="search"
                             placeholder="Search Songs/Artists"
