@@ -21,7 +21,7 @@ export default function AdminView(){
         <GlobalContainer>
         <Container>
             <ActionsBar>
-                <h1 style={{color:'#808080'}}>What can we do?</h1>
+                <h3 style={{color:'#808080'}}>What can we do?</h3>
                     {actions.map((action) => (
                         <ActionItem key={action.id}>{action.todo}</ActionItem>
                     ))}
@@ -31,16 +31,13 @@ export default function AdminView(){
                 <OverallMoodChart />
             </Graphs>
         </Container>
-            <styledDiv>
                 <GraphMonths />
-            </styledDiv>
-
         </GlobalContainer>
     );
 }
 
 const styledDiv = styled.div`
-
+margin-top: 20px;
   width: 70%;
 `;
 const GlobalContainer = styled.div`
@@ -56,6 +53,7 @@ const Container = styled.div`
   flex-direction: raw;
   width: 100%;
   height: 100%;
+  margin-bottom: 50px;
 `;
 
 
@@ -63,7 +61,7 @@ const Container = styled.div`
 const ActionsBar = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 700px;
   // border-right: 4px solid #ddd;
   padding: 10px 20px;
   // background-color: #ddd;
@@ -76,7 +74,7 @@ const ActionItem = styled.button`
   border-radius: 8px;
   margin-top: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 22px;
+  font-size: 18px;
    &&:hover {
   text-decoration: underline;
 }

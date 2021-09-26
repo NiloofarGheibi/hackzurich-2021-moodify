@@ -54,7 +54,7 @@ export default function GraphMonths(){
     const max = Math.max(...moods);
 
     return (
-            <VictoryChart  width={1000}>
+            <VictoryChart  width={900} height={200}>
                 <VictoryLine data={data}  style={{data: {stroke: "#7EC8E3"}}} />
                 <VictoryScatter
                     data={data}

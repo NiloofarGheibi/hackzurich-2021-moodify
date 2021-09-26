@@ -27,7 +27,7 @@ const Container = styled.div`
    position: absolute;              
    left: 50%;                         
    transform: translateX(-50%);
-   width: 65%;
+   width: 55%;
 `;
 
 
